@@ -24,14 +24,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StackedBarChartDemo extends Application {
+public class TestStackedBarChartDemo extends Application {
 	private TableView<Tacher> tacherTable = new TableView<Tacher>();
 	private static 	ArrayList<Tacher> list;
 	private static  StackedBarChart<Number,String> barChart;
 	private static XYChart.Series<Number,String> dataSeries1;
 	private static XYChart.Series<Number,String> dataSeries2;
-	private static ArrayList<Tacher> orderList;
-	private static Tacher tach;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -69,7 +67,7 @@ public class StackedBarChartDemo extends Application {
 					dataSeries1.getData().clear();
 					dataSeries2.getData().clear();
 
-					configCHart(triData(list));
+					configCHart();
 
 				}
 			}
@@ -122,19 +120,37 @@ public class StackedBarChartDemo extends Application {
 		dataSeries1 = new XYChart.Series<Number,String>();
 		dataSeries1.setName("--");
 
+		// dataSeries1.getNode().setStyle("-fx-bar-gap: 0.0");
 		dataSeries2 = new XYChart.Series<Number,String>();
 		dataSeries2.setName("durée");
 
+		/*   ArrayList l1= new ArrayList<String >() ;
+  	  l1.add("A");
+  	  l1.add("B");
+  	  ArrayList l2= new ArrayList<String >() ;
+  	  l2.add("D");
+  	  l2.add("A");
+       List<Tacher> list= new ArrayList<Tacher>();
+  	 list.add(new Tacher("A", null, 2));
+  	 list.add(new Tacher("B",null, 6));
+  	 list.add(new Tacher("C", l1, 3));
+   	 list.add(new Tacher("D", l1, 5));
+  	 list.add(new Tacher("E", l2, 3));
+  	  ArrayList lengthList= new ArrayList<Integer >() ;
+  	  l1.add("A");
+  	  l1.add("B");
+  	 list.forEach(x ->{
+  		 //System.out.println(x.length);
+  		 lengthList.add(x.length);
+
+  	});
+  	 System.out.println(max(lengthList));
+
+		 */
 		/**Lowd DATA in the LISTE */
 		list=lowdDdata();
-		orderList=new ArrayList<Tacher>();
-
-
-		triData(list).forEach(orderlist->{
-			System.out.println(orderlist.getName());
-		});
 		/**configuration du list */
-		configCHart(triData(list));  
+		configCHart();  
 
 
 
@@ -155,10 +171,11 @@ public class StackedBarChartDemo extends Application {
 		primaryStage.show();
 	}
 
-	private void configCHart(ArrayList<Tacher> list) {
+	private void configCHart() {
 		for (int i = 0; i < list.size() ; i++) {
 
 			if (list.get(i).getPreviousList()==null) {
+
 				dataSeries1.getData().add(new XYChart.Data<Number,String>(0,list.get(i).getName()));
 				dataSeries2.getData().add(new XYChart.Data< Number,String>( list.get(i).getLength(),list.get(i).getName()));
 				list.get(i).setDatefin(list.get(i).getLength());
@@ -206,67 +223,37 @@ public class StackedBarChartDemo extends Application {
 
 		return max;
 	}
-
-	public static  ArrayList<Tacher> triData(ArrayList<Tacher> list){
-		orderListOfNull(list);
-		list.forEach(l->{
-			if (l.getPreviousList()!=null) {
-
-				l.getPreviousList()
-				.forEach(pl->{
-					tach=findTachByName(list, pl); 
-
-					if (!orderList.contains(tach)) {
-						System.out.println("245:"+tach.getName());
-						orderList.add(tach);
-					}
-				});
-				if (!orderList.contains(l)) {
-                    orderList.add(l);
-                    }
-			}
-		});
-
-		return orderList;
-	}
-	private static  Tacher findTachByName(ArrayList<Tacher> list,String name) {
-		tach=new Tacher();
-
-		list.forEach(l->{
-			if (l.getName()==name) {
-				tach=l;
-			}
-		});
-		return tach;
-
-	}
-	private static ArrayList<Tacher> orderListOfNull(ArrayList<Tacher> list) {
-		list.forEach(l->{
-			if ((l.getPreviousList()==null)&&!(orderList.contains(l))) {
-			
-				orderList.add(l);
-				System.out.println("267:"+l.getName());
-			}
-		});
-		return orderList;
-
-	}
-
 	public static ArrayList<Tacher>lowdDdata(){
 		ArrayList<Tacher> list= new ArrayList<Tacher>();
+		list.add(new Tacher("C", null, 5));
+		list.add(new Tacher("E", null, 9));
+		list.add(new Tacher("J", new ArrayList<String>(Arrays.asList("E")), 11));      
 		list.add(new Tacher("A", new ArrayList<String>(Arrays.asList("J")), 3));
 		list.add(new Tacher("B",new ArrayList<String>(Arrays.asList("E")), 6));
-		list.add(new Tacher("C", null, 5));
 		list.add(new Tacher("D", new ArrayList<String>(Arrays.asList("B")), 2));
-		list.add(new Tacher("E", null, 9));
 		list.add(new Tacher("F", new ArrayList<String>(Arrays.asList("D","J")), 3));
 		list.add(new Tacher("G", new ArrayList<String>(Arrays.asList("E","K")), 12));
 		list.add(new Tacher("H", new ArrayList<String>(Arrays.asList("K","E")), 5));     
 		list.add(new Tacher("I", new ArrayList<String>(Arrays.asList("A","G")), 7));      
-		list.add(new Tacher("J", new ArrayList<String>(Arrays.asList("E")), 11));      
 		list.add(new Tacher("K", new ArrayList<String>(Arrays.asList("C","E")), 2));      
 
 		return list;	 
 	}
 
+	/*
+
+	  public static ArrayList<Tacher>lowdDdata(){
+		ArrayList<Tacher> list= new ArrayList<Tacher>();
+		list.add(new Tacher("A", null, 3));
+		list.add(new Tacher("B",null, 6));
+		list.add(new Tacher("C", null, 2));
+		list.add(new Tacher("D", new ArrayList<String>(Arrays.asList("A")), 4));
+		list.add(new Tacher("E", new ArrayList<String>(Arrays.asList("A")), 2));
+		list.add(new Tacher("F", new ArrayList<String>(Arrays.asList("A")), 2));
+		list.add(new Tacher("G", new ArrayList<String>(Arrays.asList("B","D")), 4));
+		list.add(new Tacher("H", new ArrayList<String>(Arrays.asList("C","E")), 3));      
+		return list;	 
+	}
+
+	 */
 }

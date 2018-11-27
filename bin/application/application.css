@@ -1,1 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.h{
+	-fx-background-color:  black ;
+	-fx-border-color:   black ;-fx-bar-gap: 0.0      ;
+	-fx-background-image: url('photocars/v10.jpg');
+}
