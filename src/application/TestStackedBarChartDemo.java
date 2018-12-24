@@ -58,7 +58,7 @@ public class TestStackedBarChartDemo extends Application {
 					tacher.setLength(Integer.parseInt(length));
 
 					ArrayList<String> previousList=new ArrayList<String>();
-					previousList.add("A");
+					previousList.add(field3.getText().toString().trim());
 					tacher.setPreviousList(previousList);
 					list.add(tacher);
 					tacherTable.getItems().clear();
@@ -225,7 +225,7 @@ public class TestStackedBarChartDemo extends Application {
 	}
 	public static ArrayList<Tacher>lowdDdata(){
 		ArrayList<Tacher> list= new ArrayList<Tacher>();
-		list.add(new Tacher("C", null, 5));
+		/*list.add(new Tacher("C", null, 5));
 		list.add(new Tacher("E", null, 9));
 		list.add(new Tacher("J", new ArrayList<String>(Arrays.asList("E")), 11));      
 		list.add(new Tacher("A", new ArrayList<String>(Arrays.asList("J")), 3));
@@ -236,7 +236,7 @@ public class TestStackedBarChartDemo extends Application {
 		list.add(new Tacher("H", new ArrayList<String>(Arrays.asList("K","E")), 5));     
 		list.add(new Tacher("I", new ArrayList<String>(Arrays.asList("A","G")), 7));      
 		list.add(new Tacher("K", new ArrayList<String>(Arrays.asList("C","E")), 2));      
-
+*/
 		return list;	 
 	}
 

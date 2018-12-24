@@ -7,7 +7,7 @@ public class Tacher {
 	String name ;
 	ArrayList<String> previousList;
 	int length;
-	int datefin;
+	int datefin=0;
 	public int getDatefin() {
 		return datefin;
 	}

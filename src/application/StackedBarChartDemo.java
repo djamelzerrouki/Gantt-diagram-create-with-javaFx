@@ -50,7 +50,7 @@ public class StackedBarChartDemo extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// You can get the new data from DB
-				List<Tacher> newProducts = new ArrayList<Tacher>();
+				ArrayList<Tacher> newProducts = new ArrayList<Tacher>();
 				String Name=field.getText().trim();
 				String length=field2.getText().trim();
 
@@ -60,7 +60,7 @@ public class StackedBarChartDemo extends Application {
 					tacher.setLength(Integer.parseInt(length));
 
 					ArrayList<String> previousList=new ArrayList<String>();
-					previousList.add("A");
+				//	previousList.add("A");
 					tacher.setPreviousList(previousList);
 					list.add(tacher);
 					tacherTable.getItems().clear();
@@ -252,7 +252,7 @@ public class StackedBarChartDemo extends Application {
 
 	}
 
-	public static ArrayList<Tacher>lowdDdata(){
+ 	public static ArrayList<Tacher>lowdDdata(){
 		ArrayList<Tacher> list= new ArrayList<Tacher>();
 		list.add(new Tacher("A", new ArrayList<String>(Arrays.asList("J")), 3));
 		list.add(new Tacher("B",new ArrayList<String>(Arrays.asList("E")), 6));
@@ -268,5 +268,18 @@ public class StackedBarChartDemo extends Application {
 
 		return list;	 
 	}
+	/*
+	  public static ArrayList<Tacher>lowdDdata(){
+			ArrayList<Tacher> list= new ArrayList<Tacher>();
+			list.add(new Tacher("A", new ArrayList<String>(Arrays.asList("C","G")), 3));
+			list.add(new Tacher("B",null, 6));
+			list.add(new Tacher("C", null, 2));
+			list.add(new Tacher("D", new ArrayList<String>(Arrays.asList("A")), 4));
+			list.add(new Tacher("E", new ArrayList<String>(Arrays.asList("A")), 2));
+			list.add(new Tacher("F", new ArrayList<String>(Arrays.asList("B")), 2));
+			list.add(new Tacher("G", new ArrayList<String>(Arrays.asList("B","D")), 4));
+			list.add(new Tacher("H", new ArrayList<String>(Arrays.asList("C","E")), 3));      
+			return list;	 
+		}*/
 
 }
