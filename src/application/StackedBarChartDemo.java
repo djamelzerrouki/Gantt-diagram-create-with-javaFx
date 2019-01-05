@@ -4,6 +4,8 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -42,7 +44,7 @@ public class StackedBarChartDemo extends Application {
 		TextField field2=new TextField();
 		field2.setPromptText("Length");
 		TextField field3=new TextField();
-		field3.setPromptText("Previous List  uses: ' , '");
+		field3.setPromptText("Previous List  uses: ' - '");
 
 
 		Button Add = new Button("Add tacher");
@@ -53,14 +55,28 @@ public class StackedBarChartDemo extends Application {
 				ArrayList<Tacher> newProducts = new ArrayList<Tacher>();
 				String Name=field.getText().trim();
 				String length=field2.getText().trim();
+				String depandens=field3.getText().trim();
 
 				if (!Name.equals(null)) {
 					Tacher tacher=new Tacher();
 					tacher.setName(Name);
 					tacher.setLength(Integer.parseInt(length));
-
 					ArrayList<String> previousList=new ArrayList<String>();
-				//	previousList.add("A");
+
+					if (!depandens.equals(null)) {
+
+						List<String> stringList = Pattern.compile("-")
+								.splitAsStream(depandens)
+								.collect(Collectors.toList());
+						stringList.forEach(s ->{
+							previousList.add(s);
+
+						});
+
+					}
+
+
+					//previousList.add("A");
 					tacher.setPreviousList(previousList);
 					list.add(tacher);
 					tacherTable.getItems().clear();
@@ -222,8 +238,8 @@ public class StackedBarChartDemo extends Application {
 					}
 				});
 				if (!orderList.contains(l)) {
-                    orderList.add(l);
-                    }
+					orderList.add(l);
+				}
 			}
 		});
 
@@ -243,7 +259,7 @@ public class StackedBarChartDemo extends Application {
 	private static ArrayList<Tacher> orderListOfNull(ArrayList<Tacher> list) {
 		list.forEach(l->{
 			if ((l.getPreviousList()==null)&&!(orderList.contains(l))) {
-			
+
 				orderList.add(l);
 				System.out.println("267:"+l.getName());
 			}
@@ -252,7 +268,7 @@ public class StackedBarChartDemo extends Application {
 
 	}
 
- 	public static ArrayList<Tacher>lowdDdata(){
+	public static ArrayList<Tacher>lowdDdata(){
 		ArrayList<Tacher> list= new ArrayList<Tacher>();
 		list.add(new Tacher("A", new ArrayList<String>(Arrays.asList("J")), 3));
 		list.add(new Tacher("B",new ArrayList<String>(Arrays.asList("E")), 6));
